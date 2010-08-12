@@ -1,4 +1,5 @@
 #include "quicklooknfo.h"
+#include "common.h"
 #include <iconv.h>
 #include <unistd.h>
 
@@ -7,61 +8,21 @@
 #define PRE_NFO_HTML "<html style='margin: 0; padding: 0; background-color: black;'><body style='margin: 0; padding: 0;'><pre style='font-family: Andale Mono, Menlo, monospace; font-size: 10px; line-height: 1; color: white;'>"
 #define POST_NFO_HTML "</pre></body></html>"
 
-int main(int argc, char* argv[]) {
-	if (argc < 2) {
-		printf("Specify nfo file");
-		return 1;
-	}
-	CFStringRef path = CFStringCreateWithCString(NULL, argv[1], kCFStringEncodingUTF8);
-	CFURLRef url = CFURLCreateWithFileSystemPath(NULL, path, kCFURLPOSIXPathStyle, false);
-	CFRelease(path);
-	CFDataRef text = createDataFromURL(url);
-	CFRelease(url);
-	if (!text) {
-		printf("File does not exist");
-		return 2;
-	}
-	CFDataRef result = createNFOString(text);
-	CFRelease(text);
-	printf("%s", CFDataGetBytePtr(result));
-	return 0;
-}
+CFDataRef createNFOString( CFDataRef text);
+CFDataRef createHTMLDataFromNFO( CFDataRef nfoString);
 
-CFDataRef createHTMLPreview( CFURLRef url )
+CFDataRef NFO2HTML( CFURLRef url )
 {
 	CFDataRef text = createDataFromURL(url);
 	if (!text) return NULL;
 	CFDataRef page = createNFOString(text);
 	CFRelease(text);
 	if (!page) return NULL;
-	CFDataRef result = createHTMLData(page);
+	CFDataRef result = createHTMLDataFromNFO(page);
 	CFRelease(page);
 	return result;
 }
 
-CFDataRef createDataFromURL( CFURLRef url )
-{
-	SInt32 errorCode = 0;
-
-	CFDataRef fileContent;
-	CFDictionaryRef dict;
-	CFArrayRef arr = CFArrayCreate(NULL, NULL, 0, NULL);
-
-	Boolean success = CFURLCreateDataAndPropertiesFromResource (NULL,
-																url,
-																&fileContent,
-																&dict,
-																arr,
-																&errorCode);
-	CFRelease(arr);
-	CFRelease(dict);
-	
-	if (!success) {
-		return NULL;
-	}
-	
-	return fileContent;
-}
 
 CFDataRef createNFOString( CFDataRef text )
 {
@@ -92,7 +53,7 @@ CFDataRef createNFOString( CFDataRef text )
 }
 
 
-CFDataRef createHTMLData(CFDataRef nfo )
+CFDataRef createHTMLDataFromNFO(CFDataRef nfo )
 {
 	CFMutableDataRef page = CFDataCreateMutable(NULL, 0);
 

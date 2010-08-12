@@ -2,13 +2,23 @@
 #include <CoreServices/CoreServices.h>
 #include <QuickLook/QuickLook.h>
 #include "quicklooknfo.h"
+#include "quicklookmarkdown.h"
 
 OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview, CFURLRef url, CFStringRef contentTypeUTI, CFDictionaryRef options)
 {
     if (QLPreviewRequestIsCancelled(preview))
         return noErr;
     
-  	CFDataRef data = createHTMLPreview( url );
+	CFStringRef mdType = CFStringCreateWithCString(NULL, "org.planbnet.markdown", kCFStringEncodingUTF8);	
+
+  	CFDataRef data;
+	if (!CFStringCompare(contentTypeUTI, mdType ,0)) {
+		data = markdown2HTML(url);		
+	} else {
+		data = NFO2HTML(url);	
+	}
+	
+	CFRelease(mdType);
 
     if (!data || QLPreviewRequestIsCancelled(preview)) {
 		return noErr;

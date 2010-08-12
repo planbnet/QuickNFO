@@ -12,6 +12,8 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.text</string>
+				<string>org.planbnet.markdown</string>
+				<string>org.planbnet.nfo</string>
 			</array>
 		</dict>
 	</array>
@@ -32,7 +34,7 @@
 	<key>CFPlugInDynamicRegisterFunction</key>
 	<string></string>
 	<key>CFPlugInDynamicRegistration</key>
-	<string>NO</string>
+	<true/>
 	<key>CFPlugInFactories</key>
 	<dict>
 		<key>2BD13CD5-0672-40C3-AAA6-EC996596815C</key>
@@ -59,6 +61,24 @@
 	<real>17</real>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>Markdown Document</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.planbnet.markdown</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>md</string>
+					<string>markdown</string>
+				</array>
+			</dict>
+		</dict>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
