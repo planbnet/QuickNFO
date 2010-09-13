@@ -16,9 +16,9 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
 	
 	CFStringRef keys[1];
 	CFStringRef values[1];
-	values [0] = CFStringCreateWithCString(NULL, "UTF-8", kCFStringEncodingUTF8);
+	values[0] = CFStringCreateWithCString(NULL, "UTF-8", kCFStringEncodingUTF8);
 	keys[0] = kQLPreviewPropertyTextEncodingNameKey;
-    CFDictionaryRef properties = CFDictionaryCreate(NULL, (void*) keys, (void*) values, 1, NULL, NULL);
+    CFDictionaryRef properties = CFDictionaryCreate(NULL, (const void **) &keys, (const void **) &values, 1, &kCFCopyStringDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
     QLPreviewRequestSetDataRepresentation(preview, (CFDataRef)data, 
                                           kUTTypeHTML, 
                                           properties);
