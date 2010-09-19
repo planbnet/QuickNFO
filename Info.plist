@@ -11,7 +11,7 @@
 			<string>QLGenerator</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>public.text</string>
+				<string>org.planbnet.nfo</string>
 			</array>
 		</dict>
 	</array>
