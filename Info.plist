@@ -7,6 +7,10 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>nfo</string>
+			</array>        
 			<key>CFBundleTypeRole</key>
 			<string>QLGenerator</string>
 			<key>LSItemContentTypes</key>
@@ -17,14 +21,12 @@
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>QuickNFO</string>
-	<key>CFBundleIconFile</key>
-	<string></string>
 	<key>CFBundleIdentifier</key>
 	<string>org.planbnet.quicknfo</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>QuickNFO</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
 	<key>CFBundleVersion</key>
@@ -57,12 +59,13 @@
 	<false/>
 	<key>QLThumbnailMinimumSize</key>
 	<real>17</real>
-	<key>UTImportedTypeDeclarations</key>
+	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.text</string>
+                <string>public.plain-text</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>NFO File</string>
@@ -70,6 +73,8 @@
 			<string>org.planbnet.nfo</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+                <key>com.apple.ostype</key>
+                <string>TEXT</string>
 				<key>public.filename-extension</key>
 				<array>
 					<string>nfo</string>
