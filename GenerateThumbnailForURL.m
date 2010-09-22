@@ -6,6 +6,8 @@
 #include "quicklooknfo.h"
 
 #define minSize 32
+#define thumbnailWidth 490.0
+#define thumbnailHeight 800.0
 
 OSStatus 
 GenerateThumbnailForURL(void *thisInterface, 
@@ -21,11 +23,11 @@ GenerateThumbnailForURL(void *thisInterface,
 
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    NSRect renderRect = NSMakeRect(0.0, 0.0, 600.0, 800.0);
-    float scale = maxSize.height/800.0;
+    NSRect renderRect = NSMakeRect(0.0, 0.0, thumbnailWidth, thumbnailHeight);
+    float scale = maxSize.height/thumbnailHeight;
     NSSize scaleSize = NSMakeSize(scale, scale);
     CGSize thumbSize = NSSizeToCGSize(
-									  NSMakeSize((maxSize.width * (600.0/800.0)), 
+									  NSMakeSize((maxSize.width * (thumbnailWidth/thumbnailHeight)), 
 												 maxSize.height));
 	
   	CFDataRef dataRef = createHTMLPreview( url );
