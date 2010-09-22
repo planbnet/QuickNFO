@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2C05A19C06CAA52B00D84F6F /* GeneratePreviewForURL.c in Sources */ = {isa = PBXBuildFile; fileRef = 2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.c */; };
+		5A7C95BA124A79C50056DCAE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7C95B9124A79C50056DCAE /* Cocoa.framework */; };
+		5A7C95BE124A79DD0056DCAE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7C95BD124A79DD0056DCAE /* WebKit.framework */; };
 		5A938943120C54DD00202A3D /* libiconv.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A938942120C54DD00202A3D /* libiconv.2.dylib */; };
 		5A93894A120C555E00202A3D /* quicklooknfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A938948120C555E00202A3D /* quicklooknfo.c */; };
 		5A938E0B120C65B400202A3D /* quicklooknfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A938E0A120C65B400202A3D /* quicklooknfo.h */; };
@@ -15,7 +17,7 @@
 		5AF76574120C7F9C009444C5 /* libiconv.2.4.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF76573120C7F9C009444C5 /* libiconv.2.4.0.dylib */; };
 		5AF76580120C8005009444C5 /* quicklooknfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 5A938948120C555E00202A3D /* quicklooknfo.c */; };
 		5AF76586120C8034009444C5 /* quicklooknfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A938E0A120C65B400202A3D /* quicklooknfo.h */; };
-		61E3BCFB0870B4F2002186A0 /* GenerateThumbnailForURL.c in Sources */ = {isa = PBXBuildFile; fileRef = 61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.c */; };
+		61E3BCFB0870B4F2002186A0 /* GenerateThumbnailForURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */; };
 		8D576312048677EA00EA77CD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB77B6FE84183AC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
 		8D576314048677EA00EA77CD /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */; };
 		8D5B49A804867FD3000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D5B49A704867FD3000E48DA /* InfoPlist.strings */; };
@@ -29,13 +31,15 @@
 		08FB77B6FE84183AC02AAC07 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = GeneratePreviewForURL.c; sourceTree = "<group>"; };
+		5A7C95B9124A79C50056DCAE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		5A7C95BD124A79DD0056DCAE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		5A938942120C54DD00202A3D /* libiconv.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.dylib; path = /usr/lib/libiconv.2.dylib; sourceTree = "<absolute>"; };
 		5A938948120C555E00202A3D /* quicklooknfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = quicklooknfo.c; sourceTree = "<group>"; };
 		5A938E0A120C65B400202A3D /* quicklooknfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quicklooknfo.h; sourceTree = "<group>"; };
 		5ACCE91D120CA1350064B603 /* NFOConvert */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NFOConvert; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF76571120C7F94009444C5 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		5AF76573120C7F9C009444C5 /* libiconv.2.4.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.2.4.0.dylib; path = usr/lib/libiconv.2.4.0.dylib; sourceTree = SDKROOT; };
-		61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = GenerateThumbnailForURL.c; sourceTree = "<group>"; };
+		61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = GenerateThumbnailForURL.m; sourceTree = "<group>"; };
 		8D576316048677EA00EA77CD /* QuickNFO.qlgenerator */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuickNFO.qlgenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D576317048677EA00EA77CD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C86B05260671AA6E00DD9006 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
@@ -62,6 +66,8 @@
 				F28CFBFD0A3EC0AF000ABFF5 /* ApplicationServices.framework in Frameworks */,
 				F28CFC030A3EC0C6000ABFF5 /* QuickLook.framework in Frameworks */,
 				5A938943120C54DD00202A3D /* libiconv.2.dylib in Frameworks */,
+				5A7C95BA124A79C50056DCAE /* Cocoa.framework in Frameworks */,
+				5A7C95BE124A79DD0056DCAE /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +95,8 @@
 				F28CFBFC0A3EC0AF000ABFF5 /* ApplicationServices.framework */,
 				C86B05260671AA6E00DD9006 /* CoreServices.framework */,
 				0AA1909FFE8422F4C02AAC07 /* CoreFoundation.framework */,
+				5A7C95B9124A79C50056DCAE /* Cocoa.framework */,
+				5A7C95BD124A79DD0056DCAE /* WebKit.framework */,
 			);
 			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
@@ -105,7 +113,7 @@
 		08FB77AFFE84173DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.c */,
+				61E3BCFA0870B4F2002186A0 /* GenerateThumbnailForURL.m */,
 				2C05A19B06CAA52B00D84F6F /* GeneratePreviewForURL.c */,
 				08FB77B6FE84183AC02AAC07 /* main.c */,
 				5A938948120C555E00202A3D /* quicklooknfo.c */,
@@ -236,7 +244,7 @@
 			files = (
 				8D576312048677EA00EA77CD /* main.c in Sources */,
 				2C05A19C06CAA52B00D84F6F /* GeneratePreviewForURL.c in Sources */,
-				61E3BCFB0870B4F2002186A0 /* GenerateThumbnailForURL.c in Sources */,
+				61E3BCFB0870B4F2002186A0 /* GenerateThumbnailForURL.m in Sources */,
 				5A93894A120C555E00202A3D /* quicklooknfo.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,1 @@
+Examples taken from http://www.roysac.com/otherascii.asp
