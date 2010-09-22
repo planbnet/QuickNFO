@@ -19,5 +19,8 @@ Examples
 ###Thumbnails
 ![QuickLook Thumbnails](http://github.com/downloads/planbnet/QuickNFO/thumbnails.png "QuickLook Thumbnails")
 
+###Coverflow
+![QuickLook Coverflow](http://github.com/downloads/planbnet/QuickNFO/coverflow.png "QuickLook Coverflow")
+
 ###Preview
 ![QuickLook Preview](http://github.com/downloads/planbnet/QuickNFO/preview.png "QuickLook Preview")
