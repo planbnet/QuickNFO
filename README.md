@@ -12,15 +12,15 @@ Installation
 
 Build the xcode project or download the [compiled plugin][download]. Then copy the file `QuickNFO.qlgenerator` to the path `Library/QuickLook` inside your home directory.
 
-[download]:http://github.com/downloads/planbnet/QuickNFO/QuickNFO.zip
+[download]:https://github.com/downloads/planbnet/QuickNFO/QuickNFO.zip
 
 Examples
 ==================
 ###Thumbnails
-![QuickLook Thumbnails](http://github.com/downloads/planbnet/QuickNFO/thumbnails.png "QuickLook Thumbnails")
+![QuickLook Thumbnails](https://github.com/downloads/planbnet/QuickNFO/thumbnails.png "QuickLook Thumbnails")
 
 ###Coverflow
-![QuickLook Coverflow](http://github.com/downloads/planbnet/QuickNFO/coverflow.png "QuickLook Coverflow")
+![QuickLook Coverflow](https://github.com/downloads/planbnet/QuickNFO/coverflow.png "QuickLook Coverflow")
 
 ###Preview
-![QuickLook Preview](http://github.com/downloads/planbnet/QuickNFO/preview.png "QuickLook Preview")
+![QuickLook Preview](https://github.com/downloads/planbnet/QuickNFO/preview.png "QuickLook Preview")
