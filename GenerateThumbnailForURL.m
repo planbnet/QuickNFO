@@ -63,6 +63,7 @@ GenerateThumbnailForURL(void *thisInterface,
     }
 	
 	CFRelease(data);
+    [webView release];
     
 	[pool release];
 	
