@@ -6,7 +6,7 @@
 #include "quicklooknfo.h"
 
 #define minSize 32
-#define thumbnailWidth 490.0
+#define thumbnailWidth 600.0
 #define thumbnailHeight 800.0
 
 OSStatus 

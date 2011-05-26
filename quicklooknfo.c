@@ -4,7 +4,7 @@
 
 #define BUFFERSIZE 1024 * 16
 
-#define PRE_NFO_HTML "<html style='margin: 0; padding: 0; background-color: black;'><body style='margin: 0; padding: 0;'><pre style='font-family: Andale Mono, Menlo, monospace; font-size: 10px; line-height: 1; color: white;'>"
+#define PRE_NFO_HTML "<html style='background-color: #000064;'><body><pre style='font-family: Andale Mono, Menlo, monospace; font-size: 12px; line-height: 1; color: #f6f6f6;'>"
 #define POST_NFO_HTML "</pre></body></html>"
 
 int main(int argc, char* argv[]) {
