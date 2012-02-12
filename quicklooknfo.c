@@ -24,6 +24,7 @@ int main(int argc, char* argv[]) {
 	CFDataRef result = createNFOString(text);
 	CFRelease(text);
 	printf("%s", CFDataGetBytePtr(result));
+	CFRelease(result);
 	return 0;
 }
 
