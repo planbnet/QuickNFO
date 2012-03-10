@@ -11,7 +11,9 @@ OSStatus GeneratePreviewForURL(void *thisInterface, QLPreviewRequestRef preview,
   	CFDataRef data = createHTMLPreview( url );
 
     if (!data || QLPreviewRequestIsCancelled(preview)) {
-		return noErr;
+		if (data)
+            CFRelease(data);
+        return noErr;
     }
 	
 	CFStringRef keys[1];
