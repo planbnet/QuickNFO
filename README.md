@@ -1,11 +1,11 @@
-QuickNFO
+QuickNFO 1.2
 ==================
 
-Max OSX QuickLook Plugin for previewing NFO files
+Mac OSX QuickLook Plugin for previewing NFO files
 
 Uses libiconv to convert the nfo text to utf8 and then lets WebKit render the output. Seems to work well (at least for the few cases I have tested).
 
-The current version supports preview and thumbnail generation.
+The current version supports preview and thumbnail generation. Rendering with HiDPI, like on retina displays, is also supported.
 
 Installation
 ==================
