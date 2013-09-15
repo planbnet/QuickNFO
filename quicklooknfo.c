@@ -4,8 +4,11 @@
 
 #define BUFFERSIZE 1024 * 16
 
-#define PRE_NFO_HTML "<html style='margin: 0; padding: 0; background-color: black;'><body style='margin: 0; padding: 0;'><pre style='font-family: Andale Mono, Menlo, monospace; font-size: 10px; line-height: 1; color: white;'>"
+#define PRE_NFO_HTML "<html style='margin: 0; padding: 0; background-color: white;'><style type='text/css'>.block { -webkit-font-smoothing: none; }</style><body style='margin: 0; padding: 0;'><pre style='font-family: Andale Mono, Menlo, monospace; font-size: 10px; line-height: 1; color: black; -webkit-font-smoothing: subpixel-antialiased;'>"
 #define POST_NFO_HTML "</pre></body></html>"
+
+#define PRE_BLOCK_HTML "<span class='block'>"
+#define POST_BLOCK_HTML "</span>"
 
 int main(int argc, char* argv[]) {
 	if (argc < 2) {
@@ -21,7 +24,7 @@ int main(int argc, char* argv[]) {
 		printf("File does not exist");
 		return 2;
 	}
-	CFDataRef result = createNFOString(text);
+	CFDataRef result = createConvertedString(text, "437", "UTF8");
 	CFRelease(text);
 	printf("%s", CFDataGetBytePtr(result));
 	CFRelease(result);
@@ -32,11 +35,18 @@ CFDataRef createHTMLPreview( CFURLRef url )
 {
 	CFDataRef text = createDataFromURL(url);
 	if (!text) return NULL;
-	CFDataRef page = createNFOString(text);
+    
+	CFDataRef ucs2 = createConvertedString(text, "437", "UCS-2-INTERNAL");
 	CFRelease(text);
-	if (!page) return NULL;
-	CFDataRef result = createHTMLData(page);
-	CFRelease(page);
+	if (!ucs2) return NULL;
+    
+    CFDataRef page2 = createHTMLData(ucs2);
+	CFRelease(ucs2);
+	if (!page2) return NULL;
+    
+    CFDataRef result = createConvertedString(page2, "UCS-2-INTERNAL", "UTF8");
+    CFRelease(page2);
+    
 	return result;
 }
 
@@ -64,14 +74,12 @@ CFDataRef createDataFromURL( CFURLRef url )
 	return fileContent;
 }
 
-CFDataRef createNFOString( CFDataRef text )
+CFDataRef createConvertedString( CFDataRef text, char* srcEncoding, char* dstEncoding )
 {
 	iconv_t cd;
-	cd = iconv_open ("UTF8", "437");
+	cd = iconv_open (dstEncoding, srcEncoding);
 	if (cd == (iconv_t) -1)
-	{
 		return NULL;
-	}
 
 	CFMutableDataRef result = CFDataCreateMutable(NULL, 0);
 	
@@ -92,14 +100,92 @@ CFDataRef createNFOString( CFDataRef text )
 	return result;
 }
 
+CFDataRef createUCS2FromConst(char * ptr, size_t length) {
+    CFDataRef tmp = CFDataCreate(NULL, (UInt8*)ptr, length);
+    CFDataRef result = createConvertedString(tmp, "C99", "UCS-2-INTERNAL");
+    CFRelease(tmp);
+    
+    return result;
+}
 
-CFDataRef createHTMLData(CFDataRef nfo )
-{
-	CFMutableDataRef page = CFDataCreateMutable(NULL, 0);
+void appendCFData(CFMutableDataRef dst, CFDataRef src) {
+    CFDataAppendBytes(dst, CFDataGetBytePtr(src), CFDataGetLength(src));
+}
 
-	CFDataAppendBytes(page, (const UInt8*) PRE_NFO_HTML, sizeof(PRE_NFO_HTML));
-	CFDataAppendBytes(page, CFDataGetBytePtr(nfo), CFDataGetLength(nfo));
-	CFDataAppendBytes(page, (const UInt8*) POST_NFO_HTML, sizeof(POST_NFO_HTML));
-	
-	return page;
+#define ISBLOCKORBOX(wchar) ((wchar >= 0x2500) && (wchar <= 0x25A9))
+#define ISWHITESPACE(wchar) ((wchar <= 0x0020))
+
+CFDataRef createHTMLData(CFDataRef nfo) {
+    // Load HTML constants (UCS2)
+    CFDataRef preNfo = createUCS2FromConst(PRE_NFO_HTML, sizeof(PRE_NFO_HTML));
+    CFDataRef postNfo = createUCS2FromConst(POST_NFO_HTML, sizeof(POST_NFO_HTML));
+    CFDataRef preBlock = createUCS2FromConst(PRE_BLOCK_HTML, sizeof(PRE_BLOCK_HTML));
+    CFDataRef postBlock = createUCS2FromConst(POST_BLOCK_HTML, sizeof(POST_BLOCK_HTML));
+    
+    
+    CFMutableDataRef result = CFDataCreateMutable(NULL, 0);
+    
+    appendCFData(result, preNfo);
+    CFRelease(preNfo);
+    
+    const UInt8* inPtr = CFDataGetBytePtr(nfo);
+	size_t inCharsLeft = CFDataGetLength(nfo) / sizeof(UInt16);
+    
+    const UInt8* bsPtr = inPtr;
+    bool inRun = false;
+    
+    while (inCharsLeft-- > 0) {
+        UInt16 chr = *((const UInt16*)inPtr);
+        
+        // Look ahead for new state
+        bool newState = inRun;
+        
+        if(!inRun) {
+            if(ISBLOCKORBOX(chr)) {
+                newState = true;
+            }
+        } else {
+            if(!ISBLOCKORBOX(chr) && !ISWHITESPACE(chr)) {
+                newState = false;
+            }
+        }
+        
+        // Process change of state, append data
+        if(inRun != newState) {
+            if(inPtr != bsPtr) {
+                if(inRun) {
+                    appendCFData(result, preBlock);
+                    CFDataAppendBytes(result, (const UInt8*)bsPtr, (inPtr - bsPtr));
+                    appendCFData(result, postBlock);
+                } else {
+                    CFDataAppendBytes(result, (const UInt8*)bsPtr, (inPtr - bsPtr));
+                }
+                
+                bsPtr = inPtr;
+            }
+            
+            inRun = newState;
+        }
+        
+        inPtr += sizeof(UInt16);
+    }
+    
+    // Append trailing data
+    if(inPtr > bsPtr) {
+        if(inRun) {
+            appendCFData(result, preBlock);
+            CFDataAppendBytes(result, (const UInt8*)bsPtr, (inPtr - bsPtr));
+            appendCFData(result, postBlock);
+        } else {
+            CFDataAppendBytes(result, (const UInt8*)bsPtr, (inPtr - bsPtr));
+        }
+    }
+    
+    CFRelease(preBlock);
+    CFRelease(postBlock);
+    
+    appendCFData(result, postNfo);
+    CFRelease(postNfo);
+    
+    return result;
 }
