@@ -17,10 +17,10 @@ Build the xcode project or download the [compiled plugin][download]. Then copy t
 Examples
 ==================
 ###Thumbnails
-![QuickLook Thumbnails](https://github.com/downloads/planbnet/QuickNFO/thumbnails.png "QuickLook Thumbnails")
+<img src="examples/thumbnails.png" alt="QuickLook Thumbnails" width="808" height="191"/>
+
+###Preview
+<img src="examples/preview.png" alt="QuickLook Preview" width="606" height="817"/>
 
 ###Coverflow
 ![QuickLook Coverflow](https://github.com/downloads/planbnet/QuickNFO/coverflow.png "QuickLook Coverflow")
-
-###Preview
-![QuickLook Preview](https://github.com/downloads/planbnet/QuickNFO/preview.png "QuickLook Preview")
