@@ -52,25 +52,24 @@ CFDataRef createHTMLPreview( CFURLRef url )
 
 CFDataRef createDataFromURL( CFURLRef url )
 {
-	SInt32 errorCode = 0;
+	CFMutableDataRef fileContent = CFDataCreateMutable(kCFAllocatorDefault, 0);
+    CFReadStreamRef stream = CFReadStreamCreateWithFile(kCFAllocatorDefault, url);
 
-	CFDataRef fileContent;
-	CFDictionaryRef dict;
-	CFArrayRef arr = CFArrayCreate(NULL, NULL, 0, NULL);
-
-	Boolean success = CFURLCreateDataAndPropertiesFromResource (NULL,
-																url,
-																&fileContent,
-																&dict,
-																arr,
-																&errorCode);
-	CFRelease(arr);
-	CFRelease(dict);
-	
-	if (!success) {
-		return NULL;
-	}
-	
+    if (stream) {
+        if (CFReadStreamOpen(stream)) {
+            UInt8 buffer[BUFFERSIZE];
+            CFIndex bytesRead;
+            do {
+                bytesRead = CFReadStreamRead(stream, buffer, sizeof(buffer));
+                if (bytesRead > 0) {
+                    CFDataAppendBytes(fileContent, buffer, bytesRead);
+                }
+            } while (bytesRead > 0);
+            CFReadStreamClose(stream);
+        }
+        CFRelease(stream);
+    }
+    
 	return fileContent;
 }
 
