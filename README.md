@@ -21,6 +21,3 @@ Examples
 
 ###Preview
 <img src="examples/preview.png" alt="QuickLook Preview" width="606" height="817"/>
-
-###Coverflow
-![QuickLook Coverflow](https://github.com/downloads/planbnet/QuickNFO/coverflow.png "QuickLook Coverflow")
