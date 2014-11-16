@@ -2,3 +2,5 @@ build
 .DS_Store
 *.mode1v3
 *.pbxuser
+QuickNFO.xcodeproj/xcuserdata
+QuickNFO.xcodeproj/project.xcworkspace
