@@ -16,8 +16,8 @@ Build the xcode project or download the [compiled plugin][download]. Then copy t
 
 Examples
 ==================
-###Thumbnails
+### Thumbnails
 <img src="examples/thumbnails.png" alt="QuickLook Thumbnails" width="722" height="171"/>
 
-###Preview
+### Preview
 <img src="examples/preview.png" alt="QuickLook Preview" width="606" height="817"/>
